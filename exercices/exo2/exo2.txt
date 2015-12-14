@@ -1,0 +1,10 @@
+Code : celui de l'exo1 avec une variable locale et un malloc en plus pour observer la pile et le stack.
+Sections avec objump -h :
+
+Idx Name          Size      VMA               LMA               File off  Algn
+ 12 .text         00000182  00000000004003c0  00000000004003c0  000003c0  2**4
+ 14 .rodata       00000016  0000000000400550  0000000000400550  00000550  2**3
+ 23 .data         0000002f  00000000006008b0  00000000006008b0  000008b0  2**3
+ 24 .bss          00000010  00000000006008e0  00000000006008e0  000008df  2**2
+
+Par ordre d'adresses croissantes.
