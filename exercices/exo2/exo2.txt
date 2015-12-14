@@ -1,4 +1,4 @@
-Sections avec objump -h :
+En reprenant le code de l'exo1, sections avec objump -h :
 
 Idx Name          Size      VMA               LMA               File off  Algn
  12 .text         00000182  00000000004003c0  00000000004003c0  000003c0  2**4
@@ -8,7 +8,30 @@ Idx Name          Size      VMA               LMA               File off  Algn
 
 Par ordre d'adresses croissantes.
 
-Pour la pile, le code code2.c déclare et initialise plusieurs variables et en
-affiche l'adresse. On observe que les adresses sont décroissantes, la pile
-croît donc dans le sens des adresses descendantes.
+Code.c print les adresses d'une variable dans la stack, d'une dans le heap,
+ainsi que l'adresse d'une fonction, qui est donc dans .text. On obtient :
+
+stack: 0x7ffe82a6cc28
+heap: 0x66d010
+other sections: 0x4005b5
+
+D'où : la stack est au-dessus du heap qui est au-dessus des autres sections
+ELF.
+
+Code2.c print les adresses de trois variables de la stack :
+
+527375116
+527375112
+527375108
+
+La stack est descendante.
+
+Pour résumer, depuis les plus petites adresses :
+sections ELF :
+    .text
+    .rodata
+    .data
+    .bss
+heap : croissant
+stack : décroissante depuis le haut des adresses.
 
