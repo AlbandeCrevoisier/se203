@@ -18,11 +18,11 @@ other sections: 0x4005b5
 D'où : la stack est au-dessus du heap qui est au-dessus des autres sections
 ELF.
 
-Code2.c print une variable de la stack, puis crée un process qui print une
-variable de la stack :
+code2.c print une variable locale à main, puis appelle une fonction qui print
+une valeur qui lui est locale :
 
-parent 0x7ffe77ab3d18
-child  0x7ffe77ab3d14
+first:  0x7ffe9fdb116c
+second: 0x7ffe9fdb114c
 
 La stack est descendante.
 
