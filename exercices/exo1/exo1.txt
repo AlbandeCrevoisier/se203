@@ -1,0 +1,11 @@
+«Here the first number is the symbol's value
+(sometimes refered to as its address).» (man objdump)
+Le premier champ n'est donc pas nécessairement une adresse.
+Si la variable globale est initialisée, alors le compilateur peut directement
+dire qu'elle sera dans .data, et peut donc lui donner une adresse (en offset,
+la valeur finale étant définie par le linker).
+Par contre, si l'adresse n'est pas initialisée, il faut la placer dans .bss si
+aucun autre fichier objet ne l'initialise, ou dans .data dans le cas contraire.
+La valeur du symbol est donc sa taille, qui permettra de calculer l'adresse à
+l'édition de liens.
+
