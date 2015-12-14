@@ -11,18 +11,18 @@ Par ordre d'adresses croissantes.
 Code.c print les adresses d'une variable dans la stack, d'une dans le heap,
 ainsi que l'adresse d'une fonction, qui est donc dans .text. On obtient :
 
-stack: 0x7ffe82a6cc28
-heap: 0x66d010
+stack:          0x7ffe82a6cc28
+heap:           0x66d010
 other sections: 0x4005b5
 
 D'où : la stack est au-dessus du heap qui est au-dessus des autres sections
 ELF.
 
-Code2.c print les adresses de trois variables de la stack :
+Code2.c print une variable de la stack, puis crée un process qui print une
+variable de la stack :
 
-527375116
-527375112
-527375108
+parent 0x7ffe77ab3d18
+child  0x7ffe77ab3d14
 
 La stack est descendante.
 
