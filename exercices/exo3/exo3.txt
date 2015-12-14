@@ -1,0 +1,69 @@
+====================================== 1 ======================================
+code.c print les tailles des différents eléments :
+.rodata :
+    valeurs immédiates
+        "Hello world!\n" : 14 octets (est stockée deux fois, une fois avec \n,
+                           une fois sans).
+        "x = %ld, y = %ld, z = %d, t = %u\n"
+La chaîne est stockée une fois avec \n, et une fois sans : une fois avec parce
+que la chaîne étant une variable globale peut être utilisée ailleurs et doît
+donc être conservée telle quelle, et une autre fois sans le \n parce que gcc
+remplace printf par puts, qui ajoute un \n à la fin de la chaîne automatique -
+ment. Donc gcc fait une optimisation en O0...
+
+====================================== 2 ======================================
+_____-O0_____
+Idx Name          Size
+0 .text         000000b8
+1 .data         00000004 
+3 .rodata       00000044
+
+_____-Os_____
+Idx Name          Size
+0 .text         00000000
+1 .data         00000004
+3 .text.startup 00000070 
+4 .rodata       0000000e
+5 .rodata.str1.1 0000002f
+
+Optimisation en taille du code : 252 octets à 178.
+Les alignements sont beaucoup plus petits, ce qui perment une meilleure
+granularité du stockage (pas besoin de bit de padding). Seule .text.startup
+est utilisée.
+On gagne 7 octets dans .rodata grâce à l'alignement.
+Dans .rodata, on ne trouve que le Hello world! avec le \n, la chaîne d'origine
+donc. .rodata a les autres strings. Readelf montre qu'il a des flags (m)erge
+et (s)trings en plus. Le flag (m) fait que, si on link un objet avec la même
+string, celle-ci ne sera pas dupliquée mais appelée dans .rodata.st1.1.
+
+_____-O1_____
+Idx Name          Size
+0 .text         00000074
+1 .data         00000004
+3 .rodata       00000010
+4 .rodata.str1.4 00000034
+De même que précédemment, sauf que l'alignement de .rodata.str1 est sur 4
+octets et non pas 1 (.rodata.str1.1 vs .rodata.str1.4).
+
+_____-O2_____
+Idx Name          Size
+0 .text         00000000
+1 .data         00000004
+3 .text.startup 00000074
+4 .rodata       00000010
+5 .rodata.str1.4 00000034
+Le .data est le même que O1.
+
+====================================== 3 ======================================
+O0 : pas de différence.
+0s, O1, O2 : la chaîne Hello world! n'est plus globale, on a donc plus besoin
+de conserver la chaîne avec un \n.
+
+====================================== 4 ======================================
+const char *msg : ne change rien, on ne pouvais déjà pas modifier la chaîne
+du fait du const(char *msg / char msg[] : char msg[] peut modifier la chaîne,
+les tableaux ne sont pas des pointeurs).
+
+const char *(const msg) : on ne peut pas modifier le pointeur, msg se retrouve
+donc dans .rodata et non pas .data.
+
