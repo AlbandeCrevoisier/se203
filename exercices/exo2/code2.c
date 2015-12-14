@@ -1,16 +1,16 @@
 #include <stdio.h>
-#include <stdint.h>
+#include <unistd.h>
 
 int
 main ()
 {
-    int foo = 42;
-    int bar = 42;
-    int baz = 42;
-
-    printf("%u\n", &foo);
-    printf("%u\n", &bar);
-    printf("%u\n", &baz);
+	int x = 42;
+	printf("parent %p\n", (void *) &x);
+	int f = fork();
+	if (f == 0) {
+		int y = 1337;
+		printf("child %p\n", (void *) &y);
+	}
 
     return 0;
 }
