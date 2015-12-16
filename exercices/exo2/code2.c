@@ -6,7 +6,7 @@ f();
 int
 main()
 {
-	int x = 42;
+    int x = 42;
     printf("first: %p\n", (void *) &x);
     f();
 
