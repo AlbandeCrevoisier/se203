@@ -19,8 +19,10 @@ SECTIONS {
 	} > ramh
 
 	.bss : {
+		_bss_start = . ;
 		*(.bss) *(COMMON)
+		_bss_end = . ;
 	} > ramh
 }
 
-ENTRY(main)
+ENTRY(_start)
