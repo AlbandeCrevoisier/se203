@@ -4,7 +4,10 @@ CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -st
 LD = arm-none-eabi-gcc
 LDFLAGS = -T ld_ram.lds -nostdlib
 
-.PHONY: clean jl JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
+.PHONY: clean jl
 
 clean :
 	rm -f *.o
+
+jl :
+	JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
