@@ -6,16 +6,16 @@ CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -st
 
 LD = arm-none-eabi-gcc
 LDFLAGS = -T ld_ram.lds -nostdlib
+LOADLIBES += crt0.o init.o
 
-OBJ = crt0.o init.o loop.o fibo.o
+vpath %.h led
+vpath %.c init loop fibo led
+vpath %.s  init
 
 .PHONY: clean jl
 
-fibo: crt0.o init.o fibo.o
-	$(LD) $(LDFLAGS) $^ -o fibo
-
-clean :
-	rm $(OBJ)
+led_main : led_main.o led.o
+	$(LD) $(LDFLAGS) $(LOADLIBES) $^ -o led_main
 
 jl :
 	JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
