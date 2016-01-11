@@ -15,6 +15,10 @@
 #define GPIOE_PCOR (*(volatile uint32_t *) 0x400FF108)
 #define GPIOD_PTOR (*(volatile uint32_t *) 0x400FF0CC)
 #define GPIOE_PTOR (*(volatile uint32_t *) 0x400FF10C)
+
+#define SET(x) (1 << x)
+#define CLEAR(x) (~(1 << x))
+
 void
 led_init(void);
 

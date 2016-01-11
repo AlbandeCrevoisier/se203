@@ -1,5 +1,4 @@
 /* LED */
-#define SET(x) (1 << x)
 #include "led.h"
 
 void
@@ -10,11 +9,11 @@ led_init(void)
 
 	/* mode GPIO */
 	PORTD_PCR5 |= SET(8);
-	PORTD_PCR5 &= ~SET(9);
-	PORTD_PCR5 &= ~SET(10);
+	PORTD_PCR5 &= CLEAR(9);
+	PORTD_PCR5 &= CLEAR(10);
 	PORTE_PCR29 |= SET(8);
-	PORTE_PCR29 &= ~SET(9);
-	PORTE_PCR29 &= ~SET(10);
+	PORTE_PCR29 &= CLEAR(9);
+	PORTE_PCR29 &= CLEAR(10);
 
 	/* mode output */
 	GPIOD_PDDR |= SET(5);
