@@ -35,4 +35,7 @@ uart_init(void);
 void
 uart_putchar(char c);
 
+unsigned char
+uart_getchar(void);
+
 #endif //UART_H
