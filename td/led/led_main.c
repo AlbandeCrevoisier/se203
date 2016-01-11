@@ -1,7 +1,12 @@
-#include "../include/led.h"
+#include "led.h"
 
 int
 main(void)
 {
 	led_init();
+	led_on();
+	led_off();
+	led_toggle();
+
+	while(1);
 }

@@ -1,5 +1,6 @@
 /* LED */
-#include "../include/led.h"
+#define SET(x) (1 << x)
+#include "led.h"
 
 void
 led_init(void)
@@ -12,10 +13,30 @@ led_init(void)
 	PORTE_PCR29 |= 0x100;
 
 	/* mode output */
-	GPIOD_PDDR |= 0x10;
-	GPIOE_PDDR |= 0x20000000;
+	GPIOD_PDDR |= SET(5);
+	GPIOE_PDDR |= SET(29);
 
 	/* Turn on the LED. */
-	GPIOD_PSOR |= 0x10;
-	GPIOD_PSOR |= 0x20000000;
+	led_on();
+}
+
+void
+led_on(void)
+{
+	GPIOD_PCOR |= SET(5);
+	GPIOE_PCOR |= SET(29);
+}
+
+void
+led_off(void)
+{
+	GPIOD_PSOR |= SET(5);
+	GPIOE_PSOR |= SET(29);
+}
+
+void
+led_toggle(void)
+{
+	GPIOD_PTOR |= SET(5);
+	GPIOE_PTOR |= SET(29);
 }
