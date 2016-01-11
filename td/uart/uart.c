@@ -62,3 +62,11 @@ uart_getchar(void)
 	while(!(UART0_S1 & UART_RDRF_MASK));
 	return UART0_D;
 }
+
+void
+uart_puts(const char *s)
+{
+	int i= 0;
+	while (i != '\0')
+		uart_putchar(s[i++]);
+}

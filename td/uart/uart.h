@@ -38,4 +38,7 @@ uart_putchar(char c);
 unsigned char
 uart_getchar(void);
 
+void
+uart_puts(const char *s);
+
 #endif //UART_H
