@@ -29,3 +29,4 @@ jl :
 
 clean :
 	rm *.o
+	rm led_main
