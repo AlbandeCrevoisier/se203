@@ -39,3 +39,12 @@ uart_init()
 	/* enable UART */
 	UART0_C2 = 0x0C;
 }
+
+void
+uart_putchar(char c)
+{
+	while(!(UART0_S1 & UART_RDRF_MASK));
+	c = UART0_D;
+	while(!(UART0_S1 & UART_TDRE_MASK) && !(UART0_S1 & UART_TC_MASK));
+	UART0_D = c;
+}
