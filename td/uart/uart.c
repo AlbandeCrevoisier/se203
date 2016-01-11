@@ -67,6 +67,6 @@ void
 uart_puts(const char *s)
 {
 	int i= 0;
-	while (i != '\0')
+	while (s[i] != '\0')
 		uart_putchar(s[i++]);
 }
