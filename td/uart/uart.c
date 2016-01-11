@@ -76,7 +76,8 @@ uart_gets(char *s, int size)
 {
 	char c;
 	int i = 0;
-	while ((c = uart_getchar())) {
+	while (i < size) {
+		c = uart_getchar();
 		if (c == '\0' && c == '\n') {
 			s[i] = c;
 			break;
@@ -84,8 +85,6 @@ uart_gets(char *s, int size)
 			break;
 		} else {
 			s[i++] = c;
-			if (i == size)
-				break;
 		}
 	}
 }
