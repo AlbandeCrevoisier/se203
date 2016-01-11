@@ -5,3 +5,5 @@ _start:
 	MOV SP, R0
 	BL init_bss
 	BL main
+loop:
+	BL loop
