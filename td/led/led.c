@@ -9,8 +9,12 @@ led_init(void)
 	SIM_SCGC5 |= 0x3000;
 
 	/* mode GPIO */
-	PORTD_PCR5 |= 0x100;
-	PORTE_PCR29 |= 0x100;
+	PORTD_PCR5 |= SET(8);
+	PORTD_PCR5 &= ~SET(9);
+	PORTD_PCR5 &= ~SET(10);
+	PORTE_PCR29 |= SET(8);
+	PORTE_PCR29 &= ~SET(9);
+	PORTE_PCR29 &= ~SET(10);
 
 	/* mode output */
 	GPIOD_PDDR |= SET(5);
