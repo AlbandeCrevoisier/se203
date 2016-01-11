@@ -70,3 +70,22 @@ uart_puts(const char *s)
 	while (s[i] != '\0')
 		uart_putchar(s[i++]);
 }
+
+void
+uart_gets(char *s, int size)
+{
+	char c;
+	int i = 0;
+	while ((c = uart_getchar())) {
+		if (c == '\0' && c == '\n') {
+			s[i] = c;
+			break;
+		} else if (c == 0) {
+			break;
+		} else {
+			s[i++] = c;
+			if (i == size)
+				break;
+		}
+	}
+}

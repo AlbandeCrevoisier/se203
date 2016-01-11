@@ -41,4 +41,7 @@ uart_getchar(void);
 void
 uart_puts(const char *s);
 
+void
+uart_gets(char *s, int size);
+
 #endif //UART_H
