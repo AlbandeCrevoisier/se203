@@ -1,3 +1,4 @@
+/* LED main */
 #include "led.h"
 
 int
