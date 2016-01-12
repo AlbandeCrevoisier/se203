@@ -78,7 +78,7 @@ uart_gets(char *s, int size)
 	int i;
 	for(i = 0; i < size; i++) {
 		c = uart_getchar();
-		if (c == '\n') {
+		if (c == '\n' || c == '\r') {
 			s[i++] = c;
 			break;
 		} else if (c == 0) {
