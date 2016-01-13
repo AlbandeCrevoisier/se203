@@ -1,18 +1,21 @@
 /* UART main */
 #include "uart.h"
 #include "../clocks/clocks.h"
+#include <stdint.h>
+
+#define TEST_SIZE 1000
 
 int
 main(void)
 {
+	int i;
+	uint32_t s = 0;
+
 	clocks_init();
 	uart_init();
 
-	uart_putchar('A');
-	uart_putchar(uart_getchar());
-	const char *s = "Hello world!";
-	uart_puts(s);
-	char *t = "";
-	uart_gets(t, 10);
-	uart_puts(t);
+	for (i = 0; i < TEST_SIZE; i++)
+		s += uart_getchar();
+
+	return s;
 }

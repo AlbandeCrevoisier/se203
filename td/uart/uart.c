@@ -59,6 +59,7 @@ uart_putchar(char c)
 unsigned char
 uart_getchar(void)
 {
+	UART0_S1 = SET(3);
 	while(!(UART0_S1 & UART_RDRF_MASK));
 	return UART0_D;
 }
