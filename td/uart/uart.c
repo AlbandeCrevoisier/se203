@@ -14,11 +14,12 @@ uart_init()
 	UART0_C2 = 0;
 
 	/* Baud rate */
-	/* SBR = 8 */
+    /* 38 400 */
+	/* SBR = 25 */
 	UART0_BDH = 0x0;
-	UART0_BDL = 0x8;
-	/* OSR = 26 */
-	UART0_C4 = 25;
+	UART0_BDL = 25;
+	/* OSR = 25 */
+	UART0_C4 = 24;
 
 	/* 8N1 */
 	UART0_C1 = 0x00;
