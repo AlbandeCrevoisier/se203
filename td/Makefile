@@ -20,13 +20,10 @@ SRC = led.c led_main.c uart.c uart_main.c matrix.c matrix_main.c
 .PHONY: clean jl
 
 matrix_main : $(INIT) matrix.o matrix_main.o
-	$(LD) $(LDFLAGS) $^ -o $@
 
 uart_main : $(INIT) uart.o uart_main.o
-	$(LD) $(LDFLAGS) $^ -o $@
 
 led_main : $(INIT) led.o led_main.o
-	$(LD) $(LDFLAGS) $^ -o $@
 
 include $(SRC:.c=.d)
 
