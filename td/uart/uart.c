@@ -14,9 +14,9 @@ uart_init()
 	UART0_C2 = 0;
 
 	/* Baud rate */
-    /* 38 400 */
+	/* 38 400 */
 	/* SBR = 25 */
-	UART0_BDH = 0x0;
+	UART0_BDH = 0;
 	UART0_BDL = 25;
 	/* OSR = 25 */
 	UART0_C4 = 24;
@@ -24,29 +24,23 @@ uart_init()
 	/* 8N1 */
 	UART0_C1 = 0x00;
 	UART0_C3 = 0x00;
-	UART0_S1 |= 0x1F;
+	UART0_S1 = 0x1F;
 	UART0_S2 |= 0xC0;
 	UART0_MA1 = 0x00;
 	UART0_MA2 = 0x00;
 
-	/* Port A: clock, RX & TX in UART mode */
+	/* Port A: clock, RX & TX in UART mode, polling mode */
 	SIM_SCGC5 |= SET(9);
 	for (int i = 0; i < 3; i++)
 		SIM_SOPT5 &= CLEAR(i);
-	PORTA_PCR1 |= SET(9);
-	PORTA_PCR1 &= CLEAR(8);
-	PORTA_PCR1 &= CLEAR(10);
-	PORTA_PCR2 |= SET(9);
-	PORTA_PCR2 &= CLEAR(8);
-	PORTA_PCR2 &= CLEAR(10);
-	/* polling: pull enable */
-	PORTA_PCR1 |= SET(0);
-	PORTA_PCR1 |= SET(1);
-	PORTA_PCR2 |= SET(0);
-	PORTA_PCR2 |= SET(1);
+	PORTA_PCR1 = 0x203;
+	PORTA_PCR2 = 0x203;
 
 	/* enable UART */
 	UART0_C2 = 0x0C;
+
+	/* Flush */
+	UART0_D;
 }
 
 void
