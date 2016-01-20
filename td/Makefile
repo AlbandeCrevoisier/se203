@@ -6,7 +6,6 @@ CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -st
 
 LD = arm-none-eabi-gcc
 LDFLAGS = -T ld_ram.lds -nostdlib
-LOADLIBES += crt0.o init.o
 
 INIT = crt0.o init.o clocks.o
 
