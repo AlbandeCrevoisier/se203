@@ -29,7 +29,7 @@ uart_init()
 	UART0_MA1 = 0x00;
 	UART0_MA2 = 0x00;
 
-	/* Port A: clock, RX & TX in UART mode, polling mode */
+	/* Port A: clock, RX & TX in UART mode, polling mode, pull up */
 	SIM_SCGC5 |= SET(9);
 	for (int i = 0; i < 3; i++)
 		SIM_SOPT5 &= CLEAR(i);

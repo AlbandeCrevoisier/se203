@@ -1,5 +1,5 @@
 /* Matrix */
-#include matrix.h
+#include "matrix.h"
 
 void
 matrix_init(void)
@@ -7,19 +7,20 @@ matrix_init(void)
 	/* Clocks port A, B, C, and D */
 	SIM_SCGC5 |= (SET(9) + SET(10) + SET(11) + SET(12));
 
-	gpio_mode(SB);
-	gpio_mode(LAT);
-	gpio_mode(RST);
-	gpio_mode(SCK);
-	gpio_mode(SDA);
-	gpio_mode(C0);
-	gpio_mode(C1);
-	gpio_mode(C2);
-	gpio_mode(C3);
-	gpio_mode(C4);
-	gpio_mode(C5);
-	gpio_mode(C6);
-	gpio_mode(C7);
+	PORTB_PCR0 = 0x203;
+	PORTB_PCR0 = 0x203;
+	PORTB_PCR1 = 0x203;
+	PORTB_PCR2 = 0x203;
+	PORTC_PCR8 = 0x203;
+	PORTC_PCR9 = 0x203;
+	PORTA_PCR13 = 0x203;
+	PORTD_PCR2 = 0x203;
+	PORTD_PCR4 = 0x203;
+	PORTD_PCR6 = 0x203;
+	PORTD_PCR7 = 0x203;
+	PORTD_PCR5 = 0x203;
+	PORTA_PCR12 = 0x203;
+	PORTA_PCR4 = 0x203;
 
 	/* output mode */
 	GPIOB_PDDR |= SET(0);
@@ -37,13 +38,147 @@ matrix_init(void)
 	GPIOA_PDDR |= SET(4);
 
 	/* init */
-	
+	RST(0);
+	LAT(1);
+	SB(1);
+	SCK(0);
+	SDA(1);
+	C0(0);
+	C1(0);
+	C2(0);
+	C3(0);
+	C4(0);
+	C5(0);
+	C6(0);
+	C7(0);
 }
 
 void
-gpio_mode(*(volatile uint32_t *) p)
+SB(int i);
 {
-	p |= SET(8);
-	p &= CLEAR(9);
-	p &= CLEAR(10);
+	switch (i) {
+	case 0 : GPIOB_PCOR |= SET(0);
+	case 1 : GPIOB_PSOR |= SET(0);
+	/* Toggle */
+	case 7 : GPIOB_PTOR |= SET(0);
+}
+
+void
+LAT(int i);
+{
+	switch (i) {
+	case 0 : GPIOB_PCOR |= SET(1);
+	case 1 : GPIOB_PSOR |= SET(1);
+	/* Toggle */
+	case 7 : GPIOB_PTOR |= SET(1);
+}
+
+void
+RST(int i);
+{
+	switch (i) {
+	case 0 : GPIOB_PCOR |= SET(2);
+	case 1 : GPIOB_PSOR |= SET(2);
+	/* Toggle */
+	case 7 : GPIOB_PTOR |= SET(2);
+}
+
+void
+SCK(int i);
+{
+	switch (i) {
+	case 0 : GPIOC_PCOR |= SET(8);
+	case 1 : GPIOC_PSOR |= SET(?);
+	/* Toggle */
+	case 7 : GPIOC_PTOR |= SET(?);
+}
+
+void
+SDA(int i);
+{
+	switch (i) {
+	case 0 : GPIOC_PCOR |= SET(9);
+	case 1 : GPIOC_PSOR |= SET(9);
+	/* Toggle */
+	case 7 : GPIOC_PTOR |= SET(9);
+}
+
+void
+C0(int i);
+{
+	switch (i) {
+	case 0 : GPIOA_PCOR |= SET(13);
+	case 1 : GPIOA_PSOR |= SET(13);
+	/* Toggle */
+	case 7 : GPIOA_PTOR |= SET(13);
+}
+
+void
+C1(int i);
+{
+	switch (i) {
+	case 0 : GPIOD_PCOR |= SET(2);
+	case 1 : GPIOD_PSOR |= SET(2);
+	/* Toggle */
+	case 7 : GPIOD_PTOR |= SET(2);
+}
+
+void
+C2(int i);
+{
+	switch (i) {
+	case 0 : GPIOD_PCOR |= SET(4);
+	case 1 : GPIOD_PSOR |= SET(4);
+	/* Toggle */
+	case 7 : GPIOD_PTOR |= SET(4);
+}
+
+void
+C3(int i);
+{
+	switch (i) {
+	case 0 : GPIOD_PCOR |= SET(6);
+	case 1 : GPIOD_PSOR |= SET(6);
+	/* Toggle */
+	case 7 : GPIOD_PTOR |= SET(6);
+}
+
+void
+C4(int i);
+{
+	switch (i) {
+	case 0 : GPIOD_PCOR |= SET(7);
+	case 1 : GPIOD_PSOR |= SET(7);
+	/* Toggle */
+	case 7 : GPIOD_PTOR |= SET(7);
+}
+
+void
+C5(int i);
+{
+	switch (i) {
+	case 0 : GPIOD_PCOR |= SET(5);
+	case 1 : GPIOD_PSOR |= SET(5);
+	/* Toggle */
+	case 7 : GPIOD_PTOR |= SET(5);
+}
+
+void
+C6(int i);
+{
+	switch (i) {
+	case 0 : GPIOA_PCOR |= SET(12);
+	case 1 : GPIOA_PSOR |= SET(12);
+	/* Toggle */
+	case 7 : GPIOA_PTOR |= SET(12);
+}
+
+void
+C7(int i);
+{
+	switch (i) {
+	case 0 : GPIOA_PCOR |= SET(4);
+	case 1 : GPIOA_PSOR |= SET(4);
+	/* Toggle */
+	case 7 : GPIOA_PTOR |= SET(4);
 }
