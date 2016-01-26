@@ -15,9 +15,9 @@ main(void)
 	/* copy image.raw */
 	for (i = 0; i < NBROW; i++) {
 		for (int j = 0; j < NBCOL; j++) {
-			matrix[i][j].r = (uint8_t) *(&_binary_image_raw_start + 3 * i + j *NBCOL);
-			matrix[i][j].g = (uint8_t) *(&_binary_image_raw_start + 3 * i + 1 + j *NBCOL);
-			matrix[i][j].b = (uint8_t) *(&_binary_image_raw_start + 3 * i + 2 + j *NBCOL);
+			matrix[i][j].r = (uint8_t) *(&_binary_image_raw_start + (3 * i) + (j * NBCOL));
+			matrix[i][j].g = (uint8_t) *(&_binary_image_raw_start + (3 * i + 1) + (j * NBCOL));
+			matrix[i][j].b = (uint8_t) *(&_binary_image_raw_start + (3 * i + 2) + (j * NBCOL));
 		}
 	}
 
