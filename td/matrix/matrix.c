@@ -334,6 +334,31 @@ deactivate_rows(void)
 }
 
 void
-activate_row(int r);
+activate_row(int r)
+{
+	switch (r) {
+	case 0:	ROW0(1);
+			break;
+
+	case 1:	ROW1(1);
+			break;
+
+	case 2:	ROW2(1);
+			break;
+
+	case 3:	ROW3(1);
+			break;
+
+	case 4:	ROW4(1);
+			break;
+
+	case 5:	ROW5(1);
+			break;
+
+	case 6:	ROW6(1);
+			break;
+
+	case 7:	ROW7(1);
+			break;
+	}
 }
-	switch {
