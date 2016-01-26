@@ -35,6 +35,4 @@ jl :
 clean :
 	rm *.o
 	rm *.d
-	rm led_main
-	rm uart_main
-	rm matrix_main
+	rm *_main
