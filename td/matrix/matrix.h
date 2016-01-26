@@ -54,4 +54,4 @@ void	C6(int);
 void	C7(int);
 
 
-#endif MATRIX_H
+#endif //MATRIX_H

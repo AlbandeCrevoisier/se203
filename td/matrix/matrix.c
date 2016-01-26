@@ -54,131 +54,144 @@ matrix_init(void)
 }
 
 void
-SB(int i);
+SB(int i)
 {
 	switch (i) {
 	case 0 : GPIOB_PCOR |= SET(0);
 	case 1 : GPIOB_PSOR |= SET(0);
 	/* Toggle */
 	case 7 : GPIOB_PTOR |= SET(0);
+	}
 }
 
 void
-LAT(int i);
+LAT(int i)
 {
 	switch (i) {
 	case 0 : GPIOB_PCOR |= SET(1);
 	case 1 : GPIOB_PSOR |= SET(1);
 	/* Toggle */
 	case 7 : GPIOB_PTOR |= SET(1);
+	}
 }
 
 void
-RST(int i);
+RST(int i)
 {
 	switch (i) {
 	case 0 : GPIOB_PCOR |= SET(2);
 	case 1 : GPIOB_PSOR |= SET(2);
 	/* Toggle */
 	case 7 : GPIOB_PTOR |= SET(2);
+	}
 }
 
 void
-SCK(int i);
+SCK(int i)
 {
 	switch (i) {
 	case 0 : GPIOC_PCOR |= SET(8);
-	case 1 : GPIOC_PSOR |= SET(?);
+	case 1 : GPIOC_PSOR |= SET(8);
 	/* Toggle */
-	case 7 : GPIOC_PTOR |= SET(?);
+	case 7 : GPIOC_PTOR |= SET(8);
+	}
 }
 
 void
-SDA(int i);
+SDA(int i)
 {
 	switch (i) {
 	case 0 : GPIOC_PCOR |= SET(9);
 	case 1 : GPIOC_PSOR |= SET(9);
 	/* Toggle */
 	case 7 : GPIOC_PTOR |= SET(9);
+	}
 }
 
 void
-C0(int i);
+C0(int i)
 {
 	switch (i) {
 	case 0 : GPIOA_PCOR |= SET(13);
 	case 1 : GPIOA_PSOR |= SET(13);
 	/* Toggle */
 	case 7 : GPIOA_PTOR |= SET(13);
+	}
 }
 
 void
-C1(int i);
+C1(int i)
 {
 	switch (i) {
 	case 0 : GPIOD_PCOR |= SET(2);
 	case 1 : GPIOD_PSOR |= SET(2);
 	/* Toggle */
 	case 7 : GPIOD_PTOR |= SET(2);
+	}
 }
 
 void
-C2(int i);
+C2(int i)
 {
 	switch (i) {
 	case 0 : GPIOD_PCOR |= SET(4);
 	case 1 : GPIOD_PSOR |= SET(4);
 	/* Toggle */
 	case 7 : GPIOD_PTOR |= SET(4);
+	}
 }
 
 void
-C3(int i);
+C3(int i)
 {
 	switch (i) {
 	case 0 : GPIOD_PCOR |= SET(6);
 	case 1 : GPIOD_PSOR |= SET(6);
 	/* Toggle */
 	case 7 : GPIOD_PTOR |= SET(6);
+	}
 }
 
 void
-C4(int i);
+C4(int i)
 {
 	switch (i) {
 	case 0 : GPIOD_PCOR |= SET(7);
 	case 1 : GPIOD_PSOR |= SET(7);
 	/* Toggle */
 	case 7 : GPIOD_PTOR |= SET(7);
+	}
 }
 
 void
-C5(int i);
+C5(int i)
 {
 	switch (i) {
 	case 0 : GPIOD_PCOR |= SET(5);
 	case 1 : GPIOD_PSOR |= SET(5);
 	/* Toggle */
 	case 7 : GPIOD_PTOR |= SET(5);
+	}
 }
 
 void
-C6(int i);
+C6(int i)
 {
 	switch (i) {
 	case 0 : GPIOA_PCOR |= SET(12);
 	case 1 : GPIOA_PSOR |= SET(12);
 	/* Toggle */
 	case 7 : GPIOA_PTOR |= SET(12);
+	}
 }
 
 void
-C7(int i);
+C7(int i)
 {
 	switch (i) {
 	case 0 : GPIOA_PCOR |= SET(4);
 	case 1 : GPIOA_PSOR |= SET(4);
 	/* Toggle */
 	case 7 : GPIOA_PTOR |= SET(4);
+	}
 }
