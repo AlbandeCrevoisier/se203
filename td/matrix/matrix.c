@@ -46,17 +46,17 @@ matrix_init(void)
 	SB(1);
 	SCK(0);
 	SDA(1);
-	C0(0);
-	C1(0);
-	C2(0);
-	C3(0);
-	C4(0);
-	C5(0);
-	C6(0);
-	C7(0);
+	ROW0(0);
+	ROW1(0);
+	ROW2(0);
+	ROW3(0);
+	ROW4(0);
+	ROW5(0);
+	ROW6(0);
+	ROW7(0);
 
 	/* ~100ms */
-	for (i = 0; i < NOP_NB; i++)
+	for (i = 0; i < NOP100MS; i++)
 		asm volatile ("nop");
 
 	RST(1);
@@ -66,10 +66,17 @@ void
 SB(int i)
 {
 	switch (i) {
-	case 0 : GPIOB_PCOR |= SET(0);
-	case 1 : GPIOB_PSOR |= SET(0);
-	/* Toggle */
-	case 7 : GPIOB_PTOR |= SET(0);
+	case 0:	/* Clear */
+			GPIOB_PCOR |= SET(0);
+			break;
+
+	case 1:	/* Set */
+			GPIOB_PSOR |= SET(0);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOB_PTOR |= SET(0);
+			break;
 	}
 }
 
@@ -77,10 +84,17 @@ void
 LAT(int i)
 {
 	switch (i) {
-	case 0 : GPIOB_PCOR |= SET(1);
-	case 1 : GPIOB_PSOR |= SET(1);
-	/* Toggle */
-	case 7 : GPIOB_PTOR |= SET(1);
+	case 0:	/* Clear */
+			GPIOB_PCOR |= SET(1);
+			break;
+
+	case 1:	/* Set */
+			GPIOB_PSOR |= SET(1);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOB_PTOR |= SET(1);
+			break;
 	}
 }
 
@@ -88,10 +102,17 @@ void
 RST(int i)
 {
 	switch (i) {
-	case 0 : GPIOB_PCOR |= SET(2);
-	case 1 : GPIOB_PSOR |= SET(2);
-	/* Toggle */
-	case 7 : GPIOB_PTOR |= SET(2);
+	case 0:	/* Clear */
+			GPIOB_PCOR |= SET(2);
+			break;
+
+	case 1:	/* Set */
+			GPIOB_PSOR |= SET(2);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOB_PTOR |= SET(2);
+			break;
 	}
 }
 
@@ -99,10 +120,17 @@ void
 SCK(int i)
 {
 	switch (i) {
-	case 0 : GPIOC_PCOR |= SET(8);
-	case 1 : GPIOC_PSOR |= SET(8);
-	/* Toggle */
-	case 7 : GPIOC_PTOR |= SET(8);
+	case 0:	/* Clear */
+			GPIOC_PCOR |= SET(8);
+			break;
+
+	case 1:	/* Set */
+			GPIOC_PSOR |= SET(8);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOC_PTOR |= SET(8);
+			break;
 	}
 }
 
@@ -110,97 +138,202 @@ void
 SDA(int i)
 {
 	switch (i) {
-	case 0 : GPIOC_PCOR |= SET(9);
-	case 1 : GPIOC_PSOR |= SET(9);
-	/* Toggle */
-	case 7 : GPIOC_PTOR |= SET(9);
+	case 0:	/* Clear */
+			GPIOC_PCOR |= SET(9);
+			break;
+
+	case 1:	/* Set */
+			GPIOC_PSOR |= SET(9);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOC_PTOR |= SET(9);
+			break;
 	}
 }
 
 void
-C0(int i)
+ROW0(int i)
 {
 	switch (i) {
-	case 0 : GPIOA_PCOR |= SET(13);
-	case 1 : GPIOA_PSOR |= SET(13);
-	/* Toggle */
-	case 7 : GPIOA_PTOR |= SET(13);
+	case 0:	/* Clear */
+			GPIOA_PCOR |= SET(13);
+			break;
+
+	case 1:	/* Set */
+			GPIOA_PSOR |= SET(13);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOA_PTOR |= SET(13);
+			break;
 	}
 }
 
 void
-C1(int i)
+ROW1(int i)
 {
 	switch (i) {
-	case 0 : GPIOD_PCOR |= SET(2);
-	case 1 : GPIOD_PSOR |= SET(2);
-	/* Toggle */
-	case 7 : GPIOD_PTOR |= SET(2);
+	case 0:	/* Clear */
+			GPIOD_PCOR |= SET(2);
+			break;
+
+	case 1:	/* Set */
+			GPIOD_PSOR |= SET(2);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOD_PTOR |= SET(2);
+			break;
 	}
 }
 
 void
-C2(int i)
+ROW2(int i)
 {
 	switch (i) {
-	case 0 : GPIOD_PCOR |= SET(4);
-	case 1 : GPIOD_PSOR |= SET(4);
-	/* Toggle */
-	case 7 : GPIOD_PTOR |= SET(4);
+	case 0:	/* Clear */
+			GPIOD_PCOR |= SET(4);
+			break;
+
+	case 1:	/* Set */
+			GPIOD_PSOR |= SET(4);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOD_PTOR |= SET(4);
+			break;
 	}
 }
 
 void
-C3(int i)
+ROW3(int i)
 {
 	switch (i) {
-	case 0 : GPIOD_PCOR |= SET(6);
-	case 1 : GPIOD_PSOR |= SET(6);
-	/* Toggle */
-	case 7 : GPIOD_PTOR |= SET(6);
+	case 0:	/* Clear */
+			GPIOD_PCOR |= SET(6);
+			break;
+
+	case 1:	/* Set */
+			GPIOD_PSOR |= SET(6);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOD_PTOR |= SET(6);
+			break;
 	}
 }
 
 void
-C4(int i)
+ROW4(int i)
 {
 	switch (i) {
-	case 0 : GPIOD_PCOR |= SET(7);
-	case 1 : GPIOD_PSOR |= SET(7);
-	/* Toggle */
-	case 7 : GPIOD_PTOR |= SET(7);
+	case 0:	/* Clear */
+			GPIOD_PCOR |= SET(7);
+			break;
+
+	case 1:	/* Set */
+			GPIOD_PSOR |= SET(7);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOD_PTOR |= SET(7);
+			break;
 	}
 }
 
 void
-C5(int i)
+ROW5(int i)
 {
 	switch (i) {
-	case 0 : GPIOD_PCOR |= SET(5);
-	case 1 : GPIOD_PSOR |= SET(5);
-	/* Toggle */
-	case 7 : GPIOD_PTOR |= SET(5);
+	case 0:	/* Clear */
+			GPIOD_PCOR |= SET(5);
+			break;
+
+	case 1:	/* Set */
+			GPIOD_PSOR |= SET(5);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOD_PTOR |= SET(5);
+			break;
 	}
 }
 
 void
-C6(int i)
+ROW6(int i)
 {
 	switch (i) {
-	case 0 : GPIOA_PCOR |= SET(12);
-	case 1 : GPIOA_PSOR |= SET(12);
-	/* Toggle */
-	case 7 : GPIOA_PTOR |= SET(12);
+	case 0:	/* Clear */
+			GPIOA_PCOR |= SET(12);
+			break;
+
+	case 1:	/* Set */
+			GPIOA_PSOR |= SET(12);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOA_PTOR |= SET(12);
+			break;
 	}
 }
 
 void
-C7(int i)
+ROW7(int i)
 {
 	switch (i) {
-	case 0 : GPIOA_PCOR |= SET(4);
-	case 1 : GPIOA_PSOR |= SET(4);
-	/* Toggle */
-	case 7 : GPIOA_PTOR |= SET(4);
+	case 0:	/* Clear */
+			GPIOA_PCOR |= SET(4);
+			break;
+
+	case 1:	/* Set */
+			GPIOA_PSOR |= SET(4);
+			break;
+
+	case 7:	/* Toggle */
+			GPIOA_PTOR |= SET(4);
+			break;
 	}
 }
+
+void
+pulse_SCK(void)
+{
+	/* 24 MHz : 1 nop ~= 40ns. SCK requires >25ns. */
+	SCK(0);
+	asm volatile ("nop");
+	SCK(1);
+	asm volatile ("nop");
+	SCK(0);
+	asm volatile ("nop");
+}
+
+void
+pulse_LAT(void)
+{
+	/* 24 MHz : 1 nop ~= 40ns. Lat requires >25ns and >7ns. */
+	LAT(1);
+	asm volatile ("nop");
+	LAT(0);
+	asm volatile ("nop");
+	LAT(1);
+	asm volatile ("nop");
+}
+
+void
+deactivate_rows(void)
+{
+	ROW0(0);
+	ROW1(0);
+	ROW2(0);
+	ROW3(0);
+	ROW4(0);
+	ROW5(0);
+	ROW6(0);
+	ROW7(0);
+}
+
+void
+activate_row(int r);
+}
+	switch {

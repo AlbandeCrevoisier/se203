@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#define NOP_NB 3000000
+#define NOP100MS 600000
 
 #define SIM_SCGC5 (*(volatile uint32_t *) 0x40048038)
 #define GPIOA_PSOR (*(volatile uint32_t *) 0x400FF004)
@@ -46,14 +46,17 @@ void	LAT(int);
 void	RST(int);
 void	SCK(int);
 void	SDA(int);
-void	C0(int);
-void	C1(int);
-void	C2(int);
-void	C3(int);
-void	C4(int);
-void	C5(int);
-void	C6(int);
-void	C7(int);
-
+void	ROW0(int);
+void	ROW1(int);
+void	ROW2(int);
+void	ROW3(int);
+void	ROW4(int);
+void	ROW5(int);
+void	ROW6(int);
+void	ROW7(int);
+void	pulse_SCK(void);
+void pulse_LAT(void);
+void	deactivate_rows(void);
+void activate_row(int);
 
 #endif //MATRIX_H
