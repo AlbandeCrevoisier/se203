@@ -449,7 +449,7 @@ test_pixels(void)
 	}
 	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
-		for (j = 0; j < NOP1S; j++)
+		for (j = 0; j < NOP500MS; j++)
 			asm volatile ("nop");
 		deactivate_row(i);
 	}
@@ -464,7 +464,7 @@ test_pixels(void)
 	}
 	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
-		for (j = 0; j < NOP1S; j++)
+		for (j = 0; j < NOP500MS; j++)
 			asm volatile ("nop");
 		deactivate_row(i);
 	}
@@ -477,7 +477,7 @@ test_pixels(void)
 	}
 	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
-		for (j = 0; j < NOP1S; j++)
+		for (j = 0; j < NOP500MS; j++)
 			asm volatile ("nop");
 		deactivate_row(i);
 	}

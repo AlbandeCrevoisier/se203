@@ -12,13 +12,16 @@ INIT = crt0.o init.o clocks.o
 vpath %.h led uart clocks matrix
 vpath %.c init loop fibo led uart matrix
 vpath %.s  init
-vpath %.o clocks
+vpath %.o clocks matrix
 
 SRC = led.c led_main.c uart.c uart_main.c matrix.c matrix_main.c
 
 .PHONY: clean jl
 
-matrix_main : $(INIT) matrix.o matrix_main.o
+matrix_main : $(INIT) matrix.o matrix_main.o image.o
+
+image.o : matrix/image.raw
+	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
 
 uart_main : $(INIT) uart.o uart_main.o
 
