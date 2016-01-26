@@ -27,7 +27,7 @@ uart_main : $(INIT) uart.o uart_main.o
 
 led_main : $(INIT) led.o led_main.o
 
-include $(SRC:.c=.d)
+-include $(SRC:.c=.d)
 
 %.d : %.c
 	$(CC) $(CFLAGS) -MM -MF $@ -MP $<
