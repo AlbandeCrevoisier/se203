@@ -374,8 +374,20 @@ send_byte(uint8_t val, int bank)
 		bit = (val >> i);
 		bit &= 1;
 		SDA(bit);
-//		SDA(((val >> i) &= 1));
 		pulse_SCK();
 	}
+}
+
+/* val : array of 8 * rgb_color */
+void
+mat_set_row(int r, const rgb_color *val)
+{
+	int i;
+	for (i = 7; i > -1; i--) {
+		send_byte(val[i]->b);
+		send_byte(val[i]->g);
+		send_byte(val[i]->r);
+	}
+	activate_row(r);
 	pulse_LAT();
 }
