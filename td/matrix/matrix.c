@@ -61,8 +61,17 @@ matrix_init(void)
 
 	RST(1);
 
-	/* Init Bank0 to 1, since we do not use it. */
-	send_byte(0xFF, 0);
+	bank0_init();
+}
+
+void
+bank0_init(void)
+{
+	int i, j;
+	for (i = 0; i < 8; i++)
+		for (j = 0; j < 24; j++)
+			send_byte(0xFF, 1);
+	pulse_LAT();
 }
 
 void

@@ -46,7 +46,8 @@ typedef struct {
 #define SET(x) (1 << x)
 #define CLEAR(x) (~(1 << x))
 
-void	matrix_init();
+void	matrix_init(void);
+void bank0_init(void);
 void	SB(int);
 void	LAT(int);
 void	RST(int);
@@ -66,7 +67,5 @@ void	deactivate_rows(void);
 void activate_row(int);
 void	send_byte(uint8_t, int);
 void	mat_set_row(int, const rgb_color*);
-
-
 
 #endif //MATRIX_H
