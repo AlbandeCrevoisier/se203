@@ -60,17 +60,18 @@ matrix_init(void)
 		asm volatile ("nop");
 
 	RST(1);
-
 	bank0_init();
+
+	test_pixels();
 }
 
 void
 bank0_init(void)
 {
 	int i, j;
-	for (i = 0; i < 8; i++)
+	for (i = 0; i < NBROW; i++)
 		for (j = 0; j < 24; j++)
-			send_byte(0xFF, 1);
+			send_byte(0xFF, 0);
 	pulse_LAT();
 }
 
@@ -402,4 +403,44 @@ mat_set_row(int r, const rgb_color *val)
 	}
 	activate_row(r);
 	pulse_LAT();
+}
+
+void
+test_pixels(void)
+{
+	int i;
+	rgb_color row[8];
+	
+	/* red */
+	for (i = 0; i < NBROW; i++) {
+		row[i].r = 1;
+		row[i].g = 0;
+		row[i].b = 0;
+	}
+	for (i = 0; i < NBROW; i++)
+		mat_set_row(i, row);
+	for (i = 0; i < NOP1S; i++)
+		asm volatile ("nop");
+
+	/* green */
+	for (i = 0; i < NBROW; i++) {
+		row[i].r = 0;
+		row[i].g = 1;
+		row[i].b = 0;
+	}
+	for (i = 0; i < NBROW; i++)
+		mat_set_row(i, row);
+	for (i = 0; i < NOP1S; i++)
+		asm volatile ("nop");
+
+	/* blue */
+	for (i = 0; i < NBROW; i++) {
+		row[i].r = 0;
+		row[i].g = 0;
+		row[i].b = 1;
+	}
+	for (i = 0; i < NBROW; i++)
+		mat_set_row(i, row);
+	for (i = 0; i < NOP1S; i++)
+		asm volatile ("nop");
 }
