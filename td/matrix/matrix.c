@@ -60,6 +60,9 @@ matrix_init(void)
 		asm volatile ("nop");
 
 	RST(1);
+
+	/* Init Bank0 to 1, since we do not use it. */
+	send_byte(0xFF, 0);
 }
 
 void
@@ -384,9 +387,9 @@ mat_set_row(int r, const rgb_color *val)
 {
 	int i;
 	for (i = 7; i > -1; i--) {
-		send_byte(val[i]->b);
-		send_byte(val[i]->g);
-		send_byte(val[i]->r);
+		send_byte((val[i]).b, 1);
+		send_byte(val[i].g, 1);
+		send_byte(val[i].r, 1);
 	}
 	activate_row(r);
 	pulse_LAT();

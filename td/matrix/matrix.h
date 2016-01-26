@@ -4,6 +4,12 @@
 
 #include <stdint.h>
 
+typedef struct {
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+} rgb_color;
+
 #define NOP100MS 600000
 
 #define SIM_SCGC5 (*(volatile uint32_t *) 0x40048038)
@@ -61,10 +67,6 @@ void activate_row(int);
 void	send_byte(uint8_t, int);
 void	mat_set_row(int, const rgb_color*);
 
-typedef struct {
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-} rgb_color;
+
 
 #endif //MATRIX_H
