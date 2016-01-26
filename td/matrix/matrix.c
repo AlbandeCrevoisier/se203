@@ -362,3 +362,20 @@ activate_row(int r)
 			break;
 	}
 }
+
+void
+send_byte(uint8_t val, int bank)
+{
+	int i;
+	int bank_size = bank ? 8 : 6;
+	int bit;
+	SB(bank);
+	for (i = 0; i < bank_size; i++) {
+		bit = (val >> i);
+		bit &= 1;
+		SDA(bit);
+//		SDA(((val >> i) &= 1));
+		pulse_SCK();
+	}
+	pulse_LAT();
+}
