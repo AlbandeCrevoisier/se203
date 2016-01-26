@@ -4,23 +4,26 @@
 void
 matrix_init(void)
 {
+
+	int i;
+
 	/* Clocks port A, B, C, and D */
 	SIM_SCGC5 |= (SET(9) + SET(10) + SET(11) + SET(12));
 
-	PORTB_PCR0 = 0x203;
-	PORTB_PCR0 = 0x203;
-	PORTB_PCR1 = 0x203;
-	PORTB_PCR2 = 0x203;
-	PORTC_PCR8 = 0x203;
-	PORTC_PCR9 = 0x203;
-	PORTA_PCR13 = 0x203;
-	PORTD_PCR2 = 0x203;
-	PORTD_PCR4 = 0x203;
-	PORTD_PCR6 = 0x203;
-	PORTD_PCR7 = 0x203;
-	PORTD_PCR5 = 0x203;
-	PORTA_PCR12 = 0x203;
-	PORTA_PCR4 = 0x203;
+	/* GPIO mode */
+	PORTB_PCR0 = 0x103;
+	PORTB_PCR1 = 0x103;
+	PORTB_PCR2 = 0x103;
+	PORTC_PCR8 = 0x103;
+	PORTC_PCR9 = 0x103;
+	PORTA_PCR13 = 0x103;
+	PORTD_PCR2 = 0x103;
+	PORTD_PCR4 = 0x103;
+	PORTD_PCR6 = 0x103;
+	PORTD_PCR7 = 0x103;
+	PORTD_PCR5 = 0x103;
+	PORTA_PCR12 = 0x103;
+	PORTA_PCR4 = 0x103;
 
 	/* output mode */
 	GPIOB_PDDR |= SET(0);
@@ -51,6 +54,12 @@ matrix_init(void)
 	C5(0);
 	C6(0);
 	C7(0);
+
+	/* ~100ms */
+	for (i = 0; i < NOP_NB; i++)
+		asm volatile ("nop");
+
+	RST(1);
 }
 
 void

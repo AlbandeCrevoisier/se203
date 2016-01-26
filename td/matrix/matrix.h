@@ -4,6 +4,8 @@
 
 #include <stdint.h>
 
+#define NOP_NB 3000000
+
 #define SIM_SCGC5 (*(volatile uint32_t *) 0x40048038)
 #define GPIOA_PSOR (*(volatile uint32_t *) 0x400FF004)
 #define GPIOA_PCOR (*(volatile uint32_t *) 0x400FF008)
