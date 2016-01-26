@@ -377,6 +377,36 @@ activate_row(int r)
 }
 
 void
+deactivate_row(int r)
+{
+	switch (r) {
+	case 0:	ROW0(0);
+			break;
+
+	case 1:	ROW1(0);
+			break;
+
+	case 2:	ROW2(0);
+			break;
+
+	case 3:	ROW3(0);
+			break;
+
+	case 4:	ROW4(0);
+			break;
+
+	case 5:	ROW5(0);
+			break;
+
+	case 6:	ROW6(0);
+			break;
+
+	case 7:	ROW7(0);
+			break;
+	}
+}
+
+void
 send_byte(uint8_t val, int bank)
 {
 	int i;
@@ -408,39 +438,49 @@ mat_set_row(int r, const rgb_color *val)
 void
 test_pixels(void)
 {
-	int i;
+	int i, j;
 	rgb_color row[8];
 	
 	/* red */
-	for (i = 0; i < NBROW; i++) {
+	for (i = 0; i < NBCOL; i++) {
 		row[i].r = 1;
 		row[i].g = 0;
 		row[i].b = 0;
 	}
-	for (i = 0; i < NBROW; i++)
+	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
-	for (i = 0; i < NOP1S; i++)
-		asm volatile ("nop");
+		for (j = 0; j < NOP1S; j++)
+			asm volatile ("nop");
+		deactivate_row(i);
+	}
+			
+	
 
 	/* green */
-	for (i = 0; i < NBROW; i++) {
+	for (i = 0; i < NBCOL; i++) {
 		row[i].r = 0;
 		row[i].g = 1;
 		row[i].b = 0;
 	}
-	for (i = 0; i < NBROW; i++)
+	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
-	for (i = 0; i < NOP1S; i++)
-		asm volatile ("nop");
+		for (j = 0; j < NOP1S; j++)
+			asm volatile ("nop");
+		deactivate_row(i);
+	}
 
 	/* blue */
-	for (i = 0; i < NBROW; i++) {
+	for (i = 0; i < NBCOL; i++) {
 		row[i].r = 0;
 		row[i].g = 0;
 		row[i].b = 1;
 	}
-	for (i = 0; i < NBROW; i++)
+	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
-	for (i = 0; i < NOP1S; i++)
-		asm volatile ("nop");
+		for (j = 0; j < NOP1S; j++)
+			asm volatile ("nop");
+		deactivate_row(i);
+	}
+
+	deactivate_rows();
 }
