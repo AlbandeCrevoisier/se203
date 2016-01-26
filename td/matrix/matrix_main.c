@@ -7,6 +7,7 @@ main(void)
 {
 	int i, j;
 	extern uint8_t _binary_image_raw_start;
+	uint8_t *tmp = &_binary_image_raw_start;
 	rgb_color matrix[8][8];
 
 	clocks_init();	
@@ -15,9 +16,9 @@ main(void)
 	/* copy image.raw */
 	for (i = 0; i < NBROW; i++) {
 		for (int j = 0; j < NBCOL; j++) {
-			matrix[i][j].r = (uint8_t) *(&_binary_image_raw_start + (3 * i) + (j * NBCOL));
-			matrix[i][j].g = (uint8_t) *(&_binary_image_raw_start + (3 * i + 1) + (j * NBCOL));
-			matrix[i][j].b = (uint8_t) *(&_binary_image_raw_start + (3 * i + 2) + (j * NBCOL));
+			matrix[i][j].r = *(tmp++);
+			matrix[i][j].g = *(tmp++);
+			matrix[i][j].b = *(tmp++);
 		}
 	}
 

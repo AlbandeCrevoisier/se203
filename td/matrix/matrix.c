@@ -423,7 +423,7 @@ send_byte(uint8_t val, int bank)
 
 /* val : array of 8 * rgb_color */
 void
-mat_set_row(int r, const rgb_color *val)
+mat_set_row(int row, const rgb_color *val)
 {
 	int i;
 	for (i = 7; i > -1; i--) {
@@ -431,7 +431,7 @@ mat_set_row(int r, const rgb_color *val)
 		send_byte(val[i].g, 1);
 		send_byte(val[i].r, 1);
 	}
-	activate_row(r);
+	activate_row(row);
 	pulse_LAT();
 }
 
