@@ -260,7 +260,7 @@ test_pixels(void)
 	
 	/* red */
 	for (i = 0; i < NBCOL; i++) {
-		row[i].r = 1;
+		row[i].r = 0xFF;
 		row[i].g = 0;
 		row[i].b = 0;
 	}
@@ -270,13 +270,11 @@ test_pixels(void)
 			asm volatile ("nop");
 		deactivate_row(i);
 	}
-			
-	
 
 	/* green */
 	for (i = 0; i < NBCOL; i++) {
 		row[i].r = 0;
-		row[i].g = 1;
+		row[i].g = 0xFF;
 		row[i].b = 0;
 	}
 	for (i = 0; i < NBROW; i++) {
@@ -290,7 +288,7 @@ test_pixels(void)
 	for (i = 0; i < NBCOL; i++) {
 		row[i].r = 0;
 		row[i].g = 0;
-		row[i].b = 1;
+		row[i].b = 0xFF;
 	}
 	for (i = 0; i < NBROW; i++) {
 		mat_set_row(i, row);
