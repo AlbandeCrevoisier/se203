@@ -5,7 +5,7 @@
 int
 main(void)
 {
-	int i, j;
+	int i, j, k;
 	extern uint8_t _binary_image_raw_start;
 	uint8_t *tmp = &_binary_image_raw_start;
 	rgb_color matrix[8][8];
@@ -23,12 +23,14 @@ main(void)
 	}
 
 	/* print image */
-	while (1) {
+	for (k = 0; k < 1000; k++) {
 		for (i = 0; i < NBROW; i++) {
 			mat_set_row(i, matrix[i]);
-			for (j = 0; j < NOP; j++)
+			for (j = 0; j < NOP1MS; j++)
 				asm volatile ("nop");
 			deactivate_row(i);
 		}
 	}
+
+	deactivate_rows();
 }

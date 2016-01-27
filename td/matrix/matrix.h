@@ -12,7 +12,7 @@ typedef struct {
 
 #define NOP500MS	3000000
 #define NOP100MS	600000
-#define NOP		6000
+#define NOP1MS	6000
 #define NBROW	8
 #define NBCOL		8
 
