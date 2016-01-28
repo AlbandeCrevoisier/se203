@@ -9,23 +9,12 @@ LDFLAGS = -T ld_ram.lds -nostdlib
 
 INIT = crt0.o init.o clocks.o
 
-vpath %.h led uart clocks matrix
-vpath %.c init loop fibo led uart matrix
-vpath %.s  init
-vpath %.o clocks matrix
-
-SRC = led.c led_main.c uart.c uart_main.c matrix.c matrix_main.c
+SRC = main.c led.c  uart.c matrix.c
+OBJ = $(SRC:.c=.o) image.o crt0.o init.o
 
 .PHONY: clean jl
 
-matrix_main : $(INIT) matrix.o matrix_main.o image.o
-
-image.o : matrix/image.raw
-	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
-
-uart_main : $(INIT) uart.o uart_main.o
-
-led_main : $(INIT) led.o led_main.o
+main : $(INIT) led.o main.o
 
 -include $(SRC:.c=.d)
 
@@ -36,6 +25,6 @@ jl :
 	JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
 
 clean :
-	rm *.o
+	-rm $(OBJ)
 	rm *.d
-	rm *_main
+	rm main
