@@ -14,7 +14,10 @@ OBJ = $(SRC:.c=.o) image.o crt0.o init.o
 
 .PHONY: clean jl
 
-main : $(INIT) uart.o main.o
+main : $(INIT) matrix.o main.o image.o
+
+image.o : image.raw
+	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
 
 -include $(SRC:.c=.d)
 
@@ -27,4 +30,4 @@ jl :
 clean :
 	-rm $(OBJ)
 	rm *.d
-	rm main
+	-rm main

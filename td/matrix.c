@@ -32,7 +32,7 @@
 #define PORTD_PCR6  (*(volatile uint32_t *) 0x4004C018) /* C3  */
 #define PORTD_PCR7  (*(volatile uint32_t *) 0x4004C01C) /* C4  */
 #define PORTD_PCR5  (*(volatile uint32_t *) 0x4004C014) /* C5  */
-#define PORTA_PCR12 (*(volatile uint32_t *) 0x40049030  /* C6  */
+#define PORTA_PCR12 (*(volatile uint32_t *) 0x40049030)  /* C6  */
 #define PORTA_PCR4  (*(volatile uint32_t *) 0x40049010) /* C7  */
 
 #define SET(x)   (1 << x)
