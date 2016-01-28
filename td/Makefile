@@ -9,7 +9,7 @@ LDFLAGS = -T ld_ram.lds -nostdlib
 
 INIT = crt0.o init.o clocks.o
 
-SRC = main.c led.c  uart.c matrix.c
+SRC = main.c matrix.c
 OBJ = $(SRC:.c=.o) image.o crt0.o init.o
 
 .PHONY: clean jl
