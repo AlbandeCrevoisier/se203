@@ -7,14 +7,15 @@ CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -st
 LD = arm-none-eabi-gcc
 LDFLAGS = -T ld_ram.lds -nostdlib
 
-INIT = crt0.o init.o clocks.o
-
 SRC = main.c matrix.c
-OBJ = $(SRC:.c=.o) image.o crt0.o init.o
+PRECIOUS_OBJS = clocks.o
+OBJS = main.o matrix.o crt0.o init.o image.o
+
+EXE = main
 
 .PHONY: clean jl
 
-main : $(INIT) matrix.o main.o image.o
+$(EXE) : $(OBJS) $(PRECIOUS_OBJS)
 
 image.o : image.raw
 	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
@@ -28,6 +29,6 @@ jl :
 	JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
 
 clean :
-	-rm $(OBJ)
-	rm *.d
-	-rm main
+	rm -f $(OBJS)
+	rm -f *.d
+	rm $(EXE)
