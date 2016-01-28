@@ -14,7 +14,7 @@ OBJ = $(SRC:.c=.o) image.o crt0.o init.o
 
 .PHONY: clean jl
 
-main : $(INIT) led.o main.o
+main : $(INIT) uart.o main.o
 
 -include $(SRC:.c=.d)
 
