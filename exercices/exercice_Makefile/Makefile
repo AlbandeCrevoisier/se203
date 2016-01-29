@@ -17,7 +17,7 @@ $(EXE): $(OBJS) $(LIBSO)
 %.o: libs/%.c
 	$(CC) $(CLIBSFLAGS) -c -o $@ $^
 
-include $(SRC:.c=.d)
+-include $(SRC:.c=.d)
 
 %.d: %.c
 	$(CC) $(CFLAGS) -MM -MF $@ -MP $<
@@ -25,4 +25,4 @@ include $(SRC:.c=.d)
 .PHONY: clean
 
 clean:
-	rm *.o hello
+	rm *.o *.d hello
