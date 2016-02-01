@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#define enable_irq() ()
-#define disable_irq() ()
+#define enable_irq() (asm ("cpsie i"))
+#define disable_irq() (asm ("cpsid i"))
 
 #endif // IRQ_H

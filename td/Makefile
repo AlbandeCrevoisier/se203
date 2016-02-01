@@ -9,16 +9,13 @@ LDFLAGS = -T ld_ram.lds -nostdlib
 
 SRC = main.c matrix.c
 PRECIOUS_OBJS = clocks.o
-OBJS = main.o matrix.o crt0.o init.o image.o
+OBJS = crt0.o init.o main.o irq.o
 
 EXE = main
 
 .PHONY: clean jl
 
 $(EXE) : $(OBJS) $(PRECIOUS_OBJS)
-
-image.o : image.raw
-	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
 
 -include $(SRC:.c=.d)
 
