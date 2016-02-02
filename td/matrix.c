@@ -115,8 +115,6 @@ matrix_init(void)
 
     RST(1);
     bank0_init();
-
-    test_pixels();
 }
 
 void
@@ -134,11 +132,8 @@ pulse_SCK(void)
 {
     /* 24 MHz : 1 nop ~= 40ns. SCK requires >25ns. */
     SCK(0);
-    asm volatile ("nop");
     SCK(1);
-    asm volatile ("nop");
     SCK(0);
-    asm volatile ("nop");
 }
 
 void
@@ -146,11 +141,8 @@ pulse_LAT(void)
 {
     /* 24 MHz : 1 nop ~= 40ns. Lat requires >25ns and >7ns. */
     LAT(1);
-    asm volatile ("nop");
     LAT(0);
-    asm volatile ("nop");
     LAT(1);
-    asm volatile ("nop");
 }
 
 void
