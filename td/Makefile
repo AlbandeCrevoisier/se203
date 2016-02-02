@@ -28,4 +28,4 @@ jl :
 clean :
 	rm -f $(OBJS)
 	rm -f *.d
-	rm $(EXE)
+	rm -f $(EXE)
