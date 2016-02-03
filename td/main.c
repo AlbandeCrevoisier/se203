@@ -28,7 +28,6 @@ main(void)
             mat_set_row(i, matrix[i]);
             for (j = 0; j < NOP1MS; j++)
                 asm volatile ("nop");
-            deactivate_row(i);
         }
     }
 

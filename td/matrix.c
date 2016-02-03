@@ -52,8 +52,12 @@
 #define ROW6(x) (x ? (GPIOA_PSOR |= SET(12)) : (GPIOA_PCOR |= SET(12)))
 #define ROW7(x) (x ? (GPIOA_PSOR |= SET(4))  : (GPIOA_PCOR |= SET(4)))
 
-void    pulse_SCK(void);
-void    pulse_LAT(void);
+void bank0_init(void);
+void pulse_SCK(void);
+void pulse_LAT(void);
+void deactivate_row(int);
+void activate_row(int);
+void send_byte(uint8_t, int);
 
 void
 matrix_init(void)
@@ -62,7 +66,7 @@ matrix_init(void)
     int i;
 
     /* Clocks port A, B, C, and D */
-    SIM_SCGC5 |= (SET(9) + SET(10) + SET(11) + SET(12));
+    SIM_SCGC5 |= (SET(9) | SET(10) | SET(11) | SET(12));
 
     /* GPIO mode */
     PORTB_PCR0  = 0x103;
@@ -226,6 +230,7 @@ mat_set_row(int row, const rgb_color *val)
         send_byte(val[i].g, 1);
         send_byte(val[i].r, 1);
     }
+    deactivate_rows();
     activate_row(row);
     pulse_LAT();
 }
@@ -246,7 +251,6 @@ test_pixels(void)
         mat_set_row(i, row);
         for (j = 0; j < NOP500MS; j++)
             asm volatile ("nop");
-        deactivate_row(i);
     }
 
     /* green */
@@ -259,7 +263,6 @@ test_pixels(void)
         mat_set_row(i, row);
         for (j = 0; j < NOP500MS; j++)
             asm volatile ("nop");
-        deactivate_row(i);
     }
 
     /* blue */
@@ -272,7 +275,6 @@ test_pixels(void)
         mat_set_row(i, row);
         for (j = 0; j < NOP500MS; j++)
             asm volatile ("nop");
-        deactivate_row(i);
     }
 
     deactivate_rows();
