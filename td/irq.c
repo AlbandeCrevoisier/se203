@@ -8,6 +8,11 @@
 	disable_irq();\
 	while(1);}
 
+/* function pointer : void function(void) */
+typedef void (*VPFV)(void);
+
+void _start(void);
+
 MAKE_DEFAULT_HANDLER(NMI_)
 MAKE_DEFAULT_HANDLER(HardFault_)
 MAKE_DEFAULT_HANDLER(SVC_)
@@ -45,10 +50,11 @@ MAKE_DEFAULT_HANDLER(SLCD_IRQ)
 MAKE_DEFAULT_HANDLER(PCMA_IRQ)
 MAKE_DEFAULT_HANDLER(PCMCD_IRQ)
 
-void *vector_table[] = {
+extern uint8_t stack_top;
+VPFV vector_table[] = {
 	/* Stack and Reset handler */
-	&_stack,	/* Top of stack */
-	&_start,	/* Reset handler */
+	(VPFV) ((int) &stack_top),	/* Top of stack */
+	_start,				/* Reset handler */
 
 	/* ARM internal exceptions */
 	NMI_Handler,

@@ -124,10 +124,9 @@ matrix_init(void)
 void
 bank0_init(void)
 {
-    int i, j;
-    for (i = 0; i < NBROW; i++)
-        for (j = 0; j < 24; j++)
-            send_byte(0xFF, 0);
+    int i;
+    for (i = 0; i < (144/8); i++)
+        send_byte(0xFF, 0);
     pulse_LAT();
 }
 
@@ -212,10 +211,9 @@ void
 send_byte(uint8_t val, int bank)
 {
     int i;
-    int bank_size = bank ? 8 : 6;
     SB(bank);
-    for (i = 0; i < bank_size; i++) {
-        SDA(val & (1 << (bank_size - i)));
+    for (i = 0; i < 8; i++) {
+        SDA(val & (1 << (7 - i)));
         pulse_SCK();
     }
 }
