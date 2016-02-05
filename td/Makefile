@@ -9,7 +9,7 @@ LDFLAGS = -T ld_ram.lds -nostdlib
 
 SRC = main.c matrix.c
 PRECIOUS_OBJS = clocks.o
-OBJS = crt0.o init.o main.o irq.o
+OBJS = crt0.o init.o main.o irq.o flash.o
 
 EXE = main
 

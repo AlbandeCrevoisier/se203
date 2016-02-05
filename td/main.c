@@ -5,5 +5,7 @@
 int
 main(void)
 {
+	irq_init();
+
 	return 0;
 }

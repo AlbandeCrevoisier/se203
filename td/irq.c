@@ -1,6 +1,11 @@
 /* IRQ */
 #include "irq.h"
 
+#define VTOR (*(volatile uint32_t *) 0xE000ED08)
+#define NVIC_ISER (*(volatile uint32_t *) 0xE000E100)
+#define NVIC_ICER (*(volatile uint32_t *) 0xE000E180)
+
+
 #define MAKE_DEFAULT_HANDLER(X) \
 	__attribute__((weak)) \
 	void \
@@ -105,3 +110,21 @@ VPFV vector_table[] = {
 	PCMA_IRQHandler,		/* Pin detect (Port A) */
 	PCMCD_IRQHandler		/* Pin detect (Single interrupt vector for Port C and Port D) */
 	};
+
+void
+irq_init(void)
+{
+	VTOR = (uint32_t) vector_table;
+}
+
+void
+irq_enable(int irq_nb)
+{
+	NVIC_ISER = 1 << (irq_nb);
+}
+
+void
+irq_disable(int irq_nb)
+{
+	NVIC_ICER = 1 << (irq_nb);
+}
