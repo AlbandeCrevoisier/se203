@@ -55,11 +55,11 @@ MAKE_DEFAULT_HANDLER(SLCD_IRQ)
 MAKE_DEFAULT_HANDLER(PCMA_IRQ)
 MAKE_DEFAULT_HANDLER(PCMCD_IRQ)
 
-extern uint8_t stack_top;
-VPFV vector_table[] = {
+extern uint8_t _stack_top;
+static VPFV __attribute__((section(".vector_table"))) vector_table[] = {
 	/* Stack and Reset handler */
-	(VPFV) ((int) &stack_top),	/* Top of stack */
-	_start,				/* Reset handler */
+	(VPFV) ((int) &_stack_top),	/* Top of stack */
+	_start,					/* Reset handler */
 
 	/* ARM internal exceptions */
 	NMI_Handler,
@@ -82,6 +82,7 @@ VPFV vector_table[] = {
 	DMA1_IRQHandler,		/* DMA channel 1 transfer complete and error */
 	DMA2_IRQHandler,		/* DMA channel 2 transfer complete and error */
 	DMA3_IRQHandler,		/* DMA channel 3 transfer complete and error */
+	0,					/* Ghost IRQ */
 	FTFA_IRQHandler,		/* Command complete and read collision */
 	PMC_IRQHandler,
 	LLWU_IRQHandler,		/* Low Leakage Wakeup */

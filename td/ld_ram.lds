@@ -1,34 +1,37 @@
 /* Load script */
 MEMORY {
-    flash_config (rx) : ORIGIN = 0x400, LENGTH = 32
-    rom  (rx)  : ORIGIN = 0x2000, LENGTH = 256K
-    raml (!rx) : ORIGIN = 0x1fffe000, LENGTH = 8K
-    ramh (!rx) : ORIGIN = 0x20000000, LENGTH = 24K
+	flash_config (rx) : ORIGIN = 0x400, LENGTH = 32
+	rom  (rx)  : ORIGIN = 0x2000, LENGTH = 256K
+	raml (!rx) : ORIGIN = 0x1fffe000, LENGTH = 8K
+	ramh (!rx) : ORIGIN = 0x20000000, LENGTH = 24K
 }
 
 SECTIONS {
-    .flash_config : {
-        *(.flash_config)
-    } > flash_config
+	.flash_config : {
+		*(.flash_config)
+	} > flash_config
 
-    .text : {
-        *(.text)
-    } > ramh
+	.vector_table : ALIGN(0x40) {
+	} > ramh
 
-    .data : {
-        *(.data)
-    } > ramh
+	.text : {
+		*(.text)
+	} > ramh
 
-    .rodata : {
-        *(.rodata)
-    } > ramh
+	.data : {
+		*(.data)
+	} > ramh
 
-    .bss : {
-        _bss_start = . ;
-        *(.bss) *(COMMON)
-        _bss_end = . ;
-    } > ramh
+	.rodata : {
+		*(.rodata)
+	} > ramh
+
+	.bss : {
+		_bss_start = . ;
+		*(.bss) *(COMMON)
+		_bss_end = . ;
+	} > ramh
 }
 
 ENTRY(_start)
-stack_top = ORIGIN(ramh);
+_stack_top = ORIGIN(ramh);
