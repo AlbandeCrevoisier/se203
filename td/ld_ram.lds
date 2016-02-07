@@ -1,7 +1,7 @@
 /* Load script */
 MEMORY {
 	flash_config (rx) : ORIGIN = 0x400, LENGTH = 32
-	rom  (rx)  : ORIGIN = 0x2000, LENGTH = 256K
+	rom  (rx)  : ORIGIN = 2K, LENGTH = 254K
 	raml (!rx) : ORIGIN = 0x1fffe000, LENGTH = 8K
 	ramh (!rx) : ORIGIN = 0x20000000, LENGTH = 24K
 }

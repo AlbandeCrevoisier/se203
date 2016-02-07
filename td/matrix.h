@@ -11,6 +11,7 @@ typedef struct {
 } rgb_color;
 
 void matrix_init(void);
+void test_pixels(void);
 void mat_set_row(int, const rgb_color*);
 void deactivate_rows(void);
 

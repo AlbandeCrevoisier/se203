@@ -7,9 +7,9 @@ CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -st
 LD = arm-none-eabi-gcc
 LDFLAGS = -T ld_ram.lds -nostdlib
 
-SRC = main.c matrix.c
+SRC = main.c matrix.c irq.c
 PRECIOUS_OBJS = clocks.o
-OBJS = crt0.o init.o main.o irq.o flash.o
+OBJS = crt0.o init.o flash.o main.o matrix.o irq.o
 
 EXE = main
 
