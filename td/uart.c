@@ -26,6 +26,8 @@
 #define SET(x)   (1 << x)
 #define CLEAR(x) (~(1 << x))
 
+void functiontocall_handler(void);
+
 /* Main baud rates:
  * 115 200 :	SBR = 8,		OSR = 26.
  * 38 400 :	SBR = 25,		OSR = 25.
@@ -33,7 +35,7 @@
  * TODO : write a function that computes those value for a given baud rate.
  */
 void
-uart_init()
+uart_init(VPFV functocall_handler)
 {
 	/* Clock */
 	SIM_SCGC4 |= SET(10);
@@ -72,6 +74,9 @@ uart_init()
 
 	/* Flush */
 	UART0_D;
+
+	/* Handler init */
+	functiontocall_handler = functocall_handler;
 }
 
 void
@@ -117,4 +122,10 @@ uart_gets(char *s, int size)
 		}
 	}
 	s[i] = '\0';
+}
+
+void
+UART0_IRQHandler(VPFV)
+{
+	functiontocall_handler();	
 }

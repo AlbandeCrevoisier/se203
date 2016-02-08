@@ -4,10 +4,17 @@
 
 #include <stdint.h>
 
-void		uart_init(void);
+/* function pointer : void function(void) */
+typedef void (*VPFV)(void);
+
+void		uart_init(VPFV);
 void		uart_putchar(char c);
 unsigned	char uart_getchar(void);
 void		uart_puts(const char *s);
 void		uart_gets(char *s, int size);
+
+void		UART0_IRQHandler(VPFV);
+
+extern uint8_t received_byte;
 
 #endif //UART_H

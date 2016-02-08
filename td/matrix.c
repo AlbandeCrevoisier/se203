@@ -1,8 +1,10 @@
 /* Matrix */
 #include "matrix.h"
 
-#define NOP500MS 3000000
-#define NOP100MS 600000
+#define NOP500MS		3000000
+#define NOP100MS		600000
+#define NBPIXEL_COL	8
+#define NBLED_PIXEL	3
 
 #define SIM_SCGC5   (*(volatile uint32_t *) 0x40048038)
 #define GPIOA_PSOR  (*(volatile uint32_t *) 0x400FF004)
@@ -59,8 +61,10 @@ void deactivate_row(int);
 void activate_row(int);
 void send_byte(uint8_t, int);
 
+volatile uint8_t uart_byte;
+
 void
-matrix_init(void)
+matrix_init(uint8_t *uart_received_byte)
 {
 
     int i;
@@ -119,6 +123,8 @@ matrix_init(void)
 
     RST(1);
     bank0_init();
+
+	uart_byte = *uart_received_byte;
 }
 
 void
@@ -276,4 +282,25 @@ test_pixels(void)
     }
 
     deactivate_rows();
+}
+
+void
+print_matrix(void)
+{
+	int i, j;
+	for (i = 0; i < NBROW; i++) {
+		mat_set_row(i, matrix[i]);
+		for (j = 0; j < NOP1MS; j++)
+			asm volatile ("nop");
+	}
+}
+
+void
+uart_set_matrix(void)
+{
+	static int i = 0;
+	matrix
+		[(i % (NBROW) % (NBPIXEL_COL * NBLED_PIXEL)]
+		[i % NBCOL]
+		= uart_byte;
 }
