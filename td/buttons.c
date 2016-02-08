@@ -12,7 +12,7 @@
 #define GPIOE_PCOR	(*(volatile uint32_t *) 0x400FF108)
 #define GPIOE_PTOR	(*(volatile uint32_t *) 0x400FF10C)
 
-#define SET(x)   (1 << x)
+#define SET(x) (1 << x)
 #define CLEAR(x) (~(1 << x))
 
 void led_init(void);
@@ -55,19 +55,19 @@ led_init(void)
 void
 led_on(void)
 {
-    GPIOE_PCOR |= SET(29);
+	GPIOE_PCOR |= SET(29);
 }
 
 void
 led_off(void)
 {
-    GPIOE_PSOR |= SET(29);
+	GPIOE_PSOR |= SET(29);
 }
 
 void
 led_toggle(void)
 {
-    GPIOE_PTOR |= SET(29);
+	GPIOE_PTOR |= SET(29);
 }
 
 void

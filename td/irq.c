@@ -1,9 +1,9 @@
 /* IRQ */
 #include "irq.h"
 
-#define VTOR		(*(volatile uint32_t *)	0xE000ED08)
-#define NVIC_ISER	(*(volatile uint32_t *)	0xE000E100)
-#define NVIC_ICER	(*(volatile uint32_t *)	0xE000E180)
+#define VTOR (*(volatile uint32_t *) 0xE000ED08)
+#define NVIC_ISER (*(volatile uint32_t *) 0xE000E100)
+#define NVIC_ICER (*(volatile uint32_t *) 0xE000E180)
 
 #define MAKE_DEFAULT_HANDLER(X) \
 	__attribute__((weak)) \

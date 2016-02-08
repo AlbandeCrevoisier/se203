@@ -4,9 +4,11 @@
 
 #include <stdint.h>
 
-#define NOP1MS	6000
-#define NBROW	8
-#define NBCOL 	8
+#define NOP1MS 6000
+#define NBROW 8
+#define NBCOL 8
+#define NBPIXEL_COL 8
+#define NBLED_PIXEL 3
 
 typedef struct {
 	uint8_t r;
@@ -17,7 +19,7 @@ typedef struct {
 extern rgb_color matrix[8][8];
 
 /* received byte by the UART */
-void matrix_init(uint8_t*);
+void matrix_init(void);
 void test_pixels(void);
 void mat_set_row(int, const rgb_color*);
 void deactivate_rows(void);

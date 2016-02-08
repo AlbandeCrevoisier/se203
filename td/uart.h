@@ -5,17 +5,12 @@
 #include <stdint.h>
 #include "irq.h"
 
-/* function pointer : void function(void) */
-typedef void (*VPFV)(void);
+extern uint8_t uart_byte;
 
-void			uart_init(VPFV);
-void			uart_putchar(char c);
-unsigned	char uart_getchar(void);
-void			uart_puts(const char *s);
-void			uart_gets(char *s, int size);
-
-void			UART0_IRQHandler(void);
-
-extern uint8_t received_byte;
+void uart_init();
+void uart_putchar(char c);
+unsigned char uart_getchar(void);
+void uart_puts(const char *s);
+void uart_gets(char *s, int size);
 
 #endif /* UART_H */
