@@ -17,11 +17,12 @@ typedef struct {
 extern rgb_color matrix[8][8];
 
 /* received byte by the UART */
-void matrix_init(*uint8_t);
+void matrix_init(uint8_t*);
 void test_pixels(void);
 void mat_set_row(int, const rgb_color*);
 void deactivate_rows(void);
 void test_pixels(void);
 void print_matrix(void);
+void uart_set_matrix(void);
 
 #endif /* MATRIX_H */

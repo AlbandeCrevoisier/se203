@@ -115,6 +115,7 @@ void
 irq_init(void)
 {
 	VTOR = (uint32_t) vector_table;
+	enable_irq();
 }
 
 void

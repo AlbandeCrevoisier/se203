@@ -69,14 +69,18 @@ uart_init(VPFV functocall_handler)
 	PORTA_PCR1 = 0x203;
 	PORTA_PCR2 = 0x203;
 
-	/* enable UART */
-	UART0_C2 = 0x0C;
-
-	/* Flush */
-	UART0_D;
+	/* Activate IRQ */
+	enable_irq();
+	irq_enable(12);
 
 	/* Handler init */
 	functiontocall_handler = functocall_handler;
+
+	/* enable UART and UART IRQ*/
+	UART0_C2 = 0x8C;
+
+	/* Flush */
+	UART0_D;
 }
 
 void
@@ -125,7 +129,8 @@ uart_gets(char *s, int size)
 }
 
 void
-UART0_IRQHandler(VPFV)
+UART0_IRQHandler(void)
 {
+	//TODO : get the byte
 	functiontocall_handler();	
 }

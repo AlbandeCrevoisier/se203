@@ -33,6 +33,7 @@ button_init(void)
 	GPIOC_PDDR &= CLEAR(3);
 
 	/* activate IRQ on PORTC (and D) */
+	enable_irq();
 	irq_enable(PCMCD_IRQ);
 
 	led_init();

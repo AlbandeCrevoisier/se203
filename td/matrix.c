@@ -67,62 +67,62 @@ void
 matrix_init(uint8_t *uart_received_byte)
 {
 
-    int i;
+	int i;
 
-    /* Clocks port A, B, C, and D */
-    SIM_SCGC5 |= (SET(9) | SET(10) | SET(11) | SET(12));
+	/* Clocks port A, B, C, and D */
+	SIM_SCGC5 |= (SET(9) | SET(10) | SET(11) | SET(12));
 
-    /* GPIO mode */
-    PORTB_PCR0  = 0x103;
-    PORTB_PCR1  = 0x103;
-    PORTB_PCR2  = 0x103;
-    PORTC_PCR8  = 0x103;
-    PORTC_PCR9  = 0x103;
-    PORTA_PCR13 = 0x103;
-    PORTD_PCR2  = 0x103;
-    PORTD_PCR4  = 0x103;
-    PORTD_PCR6  = 0x103;
-    PORTD_PCR7  = 0x103;
-    PORTD_PCR5  = 0x103;
-    PORTA_PCR12 = 0x103;
-    PORTA_PCR4  = 0x103;
+	/* GPIO mode */
+	PORTB_PCR0  = 0x103;
+	PORTB_PCR1  = 0x103;
+	PORTB_PCR2  = 0x103;
+	PORTC_PCR8  = 0x103;
+	PORTC_PCR9  = 0x103;
+	PORTA_PCR13 = 0x103;
+	PORTD_PCR2  = 0x103;
+	PORTD_PCR4  = 0x103;
+	PORTD_PCR6  = 0x103;
+	PORTD_PCR7  = 0x103;
+	PORTD_PCR5  = 0x103;
+	PORTA_PCR12 = 0x103;
+	PORTA_PCR4  = 0x103;
 
-    /* output mode */
-    GPIOB_PDDR |= SET(0);
-    GPIOB_PDDR |= SET(1);
-    GPIOB_PDDR |= SET(2);
-    GPIOC_PDDR |= SET(8);
-    GPIOC_PDDR |= SET(9);
-    GPIOA_PDDR |= SET(13);
-    GPIOD_PDDR |= SET(2);
-    GPIOD_PDDR |= SET(4);
-    GPIOD_PDDR |= SET(6);
-    GPIOD_PDDR |= SET(7);
-    GPIOD_PDDR |= SET(5);
-    GPIOA_PDDR |= SET(12);
-    GPIOA_PDDR |= SET(4);
+	/* output mode */
+	GPIOB_PDDR |= SET(0);
+	GPIOB_PDDR |= SET(1);
+	GPIOB_PDDR |= SET(2);
+	GPIOC_PDDR |= SET(8);
+	GPIOC_PDDR |= SET(9);
+	GPIOA_PDDR |= SET(13);
+	GPIOD_PDDR |= SET(2);
+	GPIOD_PDDR |= SET(4);
+	GPIOD_PDDR |= SET(6);
+	GPIOD_PDDR |= SET(7);
+	GPIOD_PDDR |= SET(5);
+	GPIOA_PDDR |= SET(12);
+	GPIOA_PDDR |= SET(4);
 
-    /* init */
-    RST(0);
-    LAT(1);
-    SB(1);
-    SCK(0);
-    SDA(1);
-    ROW0(0);
-    ROW1(0);
-    ROW2(0);
-    ROW3(0);
-    ROW4(0);
-    ROW5(0);
-    ROW6(0);
-    ROW7(0);
+	/* init */
+	RST(0);
+	LAT(1);
+	SB(1);
+	SCK(0);
+	SDA(1);
+	ROW0(0);
+	ROW1(0);
+	ROW2(0);
+	ROW3(0);
+	ROW4(0);
+	ROW5(0);
+	ROW6(0);
+	ROW7(0);
 
-    /* ~100ms */
-    for (i = 0; i < NOP100MS; i++)
-        asm volatile ("nop");
+	/* ~100ms */
+	for (i = 0; i < NOP100MS; i++)
+		asm volatile ("nop");
 
-    RST(1);
-    bank0_init();
+	RST(1);
+	bank0_init();
 
 	uart_byte = *uart_received_byte;
 }
@@ -130,158 +130,158 @@ matrix_init(uint8_t *uart_received_byte)
 void
 bank0_init(void)
 {
-    int i;
-    for (i = 0; i < (144/8); i++)
-        send_byte(0xFF, 0);
-    pulse_LAT();
+	int i;
+	for (i = 0; i < (144/8); i++)
+		send_byte(0xFF, 0);
+	pulse_LAT();
 }
 
 void
 pulse_SCK(void)
 {
-    /* 24 MHz : 1 nop ~= 40ns. SCK requires >25ns. */
-    SCK(0);
-    SCK(1);
-    SCK(0);
+	/* 24 MHz : 1 nop ~= 40ns. SCK requires >25ns. */
+	SCK(0);
+	SCK(1);
+	SCK(0);
 }
 
 void
 pulse_LAT(void)
 {
-    /* 24 MHz : 1 nop ~= 40ns. Lat requires >25ns and >7ns. */
-    LAT(1);
-    LAT(0);
-    LAT(1);
+	/* 24 MHz : 1 nop ~= 40ns. Lat requires >25ns and >7ns. */
+	LAT(1);
+	LAT(0);
+	LAT(1);
 }
 
 void
 deactivate_rows(void)
 {
-    ROW0(0);
-    ROW1(0);
-    ROW2(0);
-    ROW3(0);
-    ROW4(0);
-    ROW5(0);
-    ROW6(0);
-    ROW7(0);
+	ROW0(0);
+	ROW1(0);
+	ROW2(0);
+	ROW3(0);
+	ROW4(0);
+	ROW5(0);
+	ROW6(0);
+	ROW7(0);
 }
 
 void
 activate_row(int r)
 {
-    switch (r) {
-    case 0: ROW0(1);
-            break;
-    case 1: ROW1(1);
-            break;
-    case 2: ROW2(1);
-            break;
-    case 3: ROW3(1);
-            break;
-    case 4: ROW4(1);
-            break;
-    case 5: ROW5(1);
-            break;
-    case 6: ROW6(1);
-            break;
-    case 7: ROW7(1);
-            break;
-    }
+	switch (r) {
+	case 0: ROW0(1);
+			break;
+	case 1: ROW1(1);
+			break;
+	case 2: ROW2(1);
+			break;
+	case 3: ROW3(1);
+			break;
+	case 4: ROW4(1);
+			break;
+	case 5: ROW5(1);
+			break;
+	case 6: ROW6(1);
+			break;
+	case 7: ROW7(1);
+			break;
+	}
 }
 
 void
 deactivate_row(int r)
 {
-    switch (r) {
-    case 0: ROW0(0);
-            break;
-    case 1: ROW1(0);
-            break;
-    case 2: ROW2(0);
-            break;
-    case 3: ROW3(0);
-            break;
-    case 4: ROW4(0);
-            break;
-    case 5: ROW5(0);
-            break;
-    case 6: ROW6(0);
-            break;
-    case 7: ROW7(0);
-            break;
-    }
+	switch (r) {
+	case 0: ROW0(0);
+			break;
+	case 1: ROW1(0);
+			break;
+	case 2: ROW2(0);
+			break;
+	case 3: ROW3(0);
+			break;
+	case 4: ROW4(0);
+			break;
+	case 5: ROW5(0);
+			break;
+	case 6: ROW6(0);
+			break;
+	case 7: ROW7(0);
+			break;
+	}
 }
 
 void
 send_byte(uint8_t val, int bank)
 {
-    int i;
-    SB(bank);
-    for (i = 0; i < 8; i++) {
-        SDA(val & (1 << (7 - i)));
-        pulse_SCK();
-    }
+	int i;
+	SB(bank);
+	for (i = 0; i < 8; i++) {
+		SDA(val & (1 << (7 - i)));
+		pulse_SCK();
+	}
 }
 
 /* val : array of 8 * rgb_color */
 void
 mat_set_row(int row, const rgb_color *val)
 {
-    int i;
-    for (i = 7; i > -1; i--) {
-        send_byte((val[i]).b, 1);
-        send_byte(val[i].g, 1);
-        send_byte(val[i].r, 1);
-    }
-    deactivate_rows();
-    activate_row(row);
-    pulse_LAT();
+	int i;
+	for (i = 7; i > -1; i--) {
+		send_byte((val[i]).b, 1);
+		send_byte(val[i].g, 1);
+		send_byte(val[i].r, 1);
+	}
+	deactivate_rows();
+	activate_row(row);
+	pulse_LAT();
 }
 
 void
 test_pixels(void)
 {
-    int i, j;
-    rgb_color row[8];
-    
-    /* red */
-    for (i = 0; i < NBCOL; i++) {
-        row[i].r = 0xFF;
-        row[i].g = 0;
-        row[i].b = 0;
-    }
-    for (i = 0; i < NBROW; i++) {
-        mat_set_row(i, row);
-        for (j = 0; j < NOP500MS; j++)
-            asm volatile ("nop");
-    }
+	int i, j;
+	rgb_color row[8];
+	
+	/* red */
+	for (i = 0; i < NBCOL; i++) {
+		row[i].r = 0xFF;
+		row[i].g = 0;
+		row[i].b = 0;
+	}
+	for (i = 0; i < NBROW; i++) {
+		mat_set_row(i, row);
+		for (j = 0; j < NOP500MS; j++)
+			asm volatile ("nop");
+	}
 
-    /* green */
-    for (i = 0; i < NBCOL; i++) {
-        row[i].r = 0;
-        row[i].g = 0xFF;
-        row[i].b = 0;
-    }
-    for (i = 0; i < NBROW; i++) {
-        mat_set_row(i, row);
-        for (j = 0; j < NOP500MS; j++)
-            asm volatile ("nop");
-    }
+	/* green */
+	for (i = 0; i < NBCOL; i++) {
+		row[i].r = 0;
+		row[i].g = 0xFF;
+		row[i].b = 0;
+	}
+	for (i = 0; i < NBROW; i++) {
+		mat_set_row(i, row);
+		for (j = 0; j < NOP500MS; j++)
+			asm volatile ("nop");
+	}
 
-    /* blue */
-    for (i = 0; i < NBCOL; i++) {
-        row[i].r = 0;
-        row[i].g = 0;
-        row[i].b = 0xFF;
-    }
-    for (i = 0; i < NBROW; i++) {
-        mat_set_row(i, row);
-        for (j = 0; j < NOP500MS; j++)
-            asm volatile ("nop");
-    }
+	/* blue */
+	for (i = 0; i < NBCOL; i++) {
+		row[i].r = 0;
+		row[i].g = 0;
+		row[i].b = 0xFF;
+	}
+	for (i = 0; i < NBROW; i++) {
+		mat_set_row(i, row);
+		for (j = 0; j < NOP500MS; j++)
+			asm volatile ("nop");
+	}
 
-    deactivate_rows();
+	deactivate_rows();
 }
 
 void
@@ -299,8 +299,15 @@ void
 uart_set_matrix(void)
 {
 	static int i = 0;
-	matrix
-		[(i % (NBROW) % (NBPIXEL_COL * NBLED_PIXEL)]
-		[i % NBCOL]
-		= uart_byte;
+	if (uart_byte == 0xFF) {
+		i = 0;
+	} else {
+		if ((i % NBCOL) % NBLED_PIXEL == 0)
+			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+		else if ((i % NBCOL) % NBLED_PIXEL == 1)
+			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+		else if ((i % NBCOL) % NBLED_PIXEL == 2)
+			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+		i++;
+	}
 }

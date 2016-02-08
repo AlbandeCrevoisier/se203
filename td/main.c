@@ -10,9 +10,9 @@ main(void)
 {
 	clocks_init();
 	matrix_init(&received_byte);
-	irq_init(uart_set_matrix);
+	irq_init();
 	button_init();
-	uart_init();
+	uart_init(uart_set_matrix);
 
 	while (1)
 		print_matrix();
