@@ -26,7 +26,7 @@
 #define SET(x)   (1 << x)
 #define CLEAR(x) (~(1 << x))
 
-void functiontocall_handler(void);
+VPFV functiontocall_handler;
 
 /* Main baud rates:
  * 115 200 :	SBR = 8,		OSR = 26.

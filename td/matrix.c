@@ -61,7 +61,7 @@ void deactivate_row(int);
 void activate_row(int);
 void send_byte(uint8_t, int);
 
-volatile uint8_t uart_byte;
+uint8_t *uart_byte;
 
 void
 matrix_init(uint8_t *uart_received_byte)
@@ -124,7 +124,7 @@ matrix_init(uint8_t *uart_received_byte)
 	RST(1);
 	bank0_init();
 
-	uart_byte = *uart_received_byte;
+	uart_byte = uart_received_byte;
 }
 
 void
@@ -299,15 +299,15 @@ void
 uart_set_matrix(void)
 {
 	static int i = 0;
-	if (uart_byte == 0xFF) {
+	if (*uart_byte == 0xFF) {
 		i = 0;
 	} else {
 		if ((i % NBCOL) % NBLED_PIXEL == 0)
-			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+			matrix[i / NBCOL][i % NBCOL].r = *uart_byte;
 		else if ((i % NBCOL) % NBLED_PIXEL == 1)
-			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+			matrix[i / NBCOL][i % NBCOL].r = *uart_byte;
 		else if ((i % NBCOL) % NBLED_PIXEL == 2)
-			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+			matrix[i / NBCOL][i % NBCOL].r = *uart_byte;
 		i++;
 	}
 }
