@@ -3,6 +3,7 @@
 #include "clocks.h"
 #include "matrix.h"
 #include "buttons.h"
+#include "uart.h"
 
 int
 main(void)
