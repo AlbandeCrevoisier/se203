@@ -25,7 +25,7 @@ void
 led_init(void)
 {
     /* Clock for Port D and E: on. */
-    SIM_SCGC5 |= 0x3000;
+    SIM_SCGC5 |= (SET(12) | SET(13));
 
     /* mode GPIO */
     PORTD_PCR5 = 0x103;

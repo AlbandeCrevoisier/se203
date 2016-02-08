@@ -1,7 +1,8 @@
-/* Matrix main */
+/* main */
 #include "irq.h"
 #include "clocks.h"
 #include "matrix.h"
+#include "buttons.h"
 
 int
 main(void)
@@ -14,6 +15,7 @@ main(void)
 	clocks_init();
 	matrix_init();
 	irq_init();
+	button_init();
 
 	/* copy image.raw */
 	for (i = 0; i < NBROW; i++) {
@@ -34,6 +36,9 @@ main(void)
 	}
 
 	deactivate_rows();
+
+	while (1)
+		test_pixels();
 
 	return 0;
 }

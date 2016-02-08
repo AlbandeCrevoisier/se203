@@ -7,15 +7,18 @@ CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -st
 LD = arm-none-eabi-gcc
 LDFLAGS = -T ld_ram.lds -nostdlib
 
-SRC = main.c matrix.c irq.c
+SRC = main.c matrix.c irq.c buttons.c
 PRECIOUS_OBJS = clocks.o
-OBJS = crt0.o init.o flash.o main.o matrix.o irq.o image.o
+OBJS = crt0.o init.o flash.o main.o matrix.o irq.o buttons.o image.o
 
 EXE = main
 
 .PHONY: clean jl
 
 $(EXE) : $(OBJS) $(PRECIOUS_OBJS)
+
+image.o : image.raw
+	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
 
 -include $(SRC:.c=.d)
 
