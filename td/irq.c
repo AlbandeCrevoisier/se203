@@ -54,6 +54,8 @@ MAKE_DEFAULT_HANDLER(SLCD_IRQ)
 MAKE_DEFAULT_HANDLER(PCMA_IRQ)
 MAKE_DEFAULT_HANDLER(PCMCD_IRQ)
 
+void UART0_IRQHandler(void);
+
 extern uint8_t _stack_top;
 static VPFV __attribute__((section(".vector_table"))) vector_table[] = {
 	/* Stack and Reset handler */

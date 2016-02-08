@@ -5,7 +5,7 @@ CC = arm-none-eabi-gcc
 CFLAGS = -g -O1 -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Werror -Wpedantic -std=gnu99
 
 LD = arm-none-eabi-gcc
-LDFLAGS = -T ld_ram.lds -nostdlib
+LDFLAGS = -T ld_ram.lds -nostdlib -lgcc
 
 SRC = main.c matrix.c irq.c buttons.c uart.c
 PRECIOUS_OBJS = clocks.o
