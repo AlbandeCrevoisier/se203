@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include "irq.h"
 
+void PCMCD_IRQHandler(void);
+
 void button_init(void);
 
 #endif /* BUTTONS_H */

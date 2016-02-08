@@ -34,6 +34,8 @@ button_init(void)
 
 	/* activate IRQ on PORTC (and D) */
 	irq_enable(PCMCD_IRQ);
+
+	led_init();
 }
 
 void
@@ -65,4 +67,11 @@ void
 led_toggle(void)
 {
     GPIOE_PTOR |= SET(29);
+}
+
+void
+PCMCD_IRQHandler(void)
+{
+	PORTC_PCR3 |= SET(24);
+	led_toggle();
 }
