@@ -10,12 +10,13 @@ void UART0_IRQHandler(void);
 int
 main(void)
 {
-
+	uart_byte = 0;
 	clocks_init();
 	matrix_init();
 	irq_init();
 	button_init();
 	uart_init();
+
 
 	while (1)
 		print_matrix();
@@ -35,9 +36,9 @@ UART0_IRQHandler(void)
 		if ((i % NBCOL) % NBLED_PIXEL == 0)
 			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
 		else if ((i % NBCOL) % NBLED_PIXEL == 1)
-			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+			matrix[i / NBCOL][i % NBCOL].g = uart_byte;
 		else if ((i % NBCOL) % NBLED_PIXEL == 2)
-			matrix[i / NBCOL][i % NBCOL].r = uart_byte;
+			matrix[i / NBCOL][i % NBCOL].b = uart_byte;
 		i++;
 	}
 }
